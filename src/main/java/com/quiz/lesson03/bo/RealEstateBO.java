@@ -39,4 +39,18 @@ public class RealEstateBO {
 		
 		return realEstateMapper.insertRealEstateAsField(realtor1Id, address, area, type, price, rentPrice);
 	}
+	
+	// input: id, type, price
+	// output: int 
+	public int updateRealEstateById(int id, String type, int price) {
+		return realEstateMapper.updateRealEstateById(id, type, price);
+	}
+	
+	
+	// input: id
+	// output: x
+	public void deleteRealEstateById(int id) {
+		realEstateMapper.deleteRealEstateById(id);
+	}
+
 }
