@@ -9,21 +9,18 @@ import com.quiz.lesson03.bo.RealEstateBO;
 
 @RestController
 public class Lesson03Quiz03RestController {
-	
+
 	@Autowired
-	private RealEstateBO realestateBO;
+	private RealEstateBO realEstateBO;
 	
 	// http://localhost:8080/lesson03/quiz03/1?id=8&type=전세&price=70000
 	@RequestMapping("/lesson03/quiz03/1")
-	public String quiz03_1() {
-		 	@RequestParam("id") int id,
-		 	@RequestParam("type") String type,
-		 	@RequestParam("price") int price) {
-		 	
-		int rowCount = RealEstateBO.updateupdateRealEstateById(id, type, price);
-		return "수정 성공:" + rowCount;	// HTML
-		 	}
+	public String quiz03_1(
+			@RequestParam("id") int id,
+			@RequestParam("type") String type,
+			@RequestParam("price") int price) {
+		
+		int rowCount = realEstateBO.updateRealEstateById(id, type, price);
+		return "수정 성공:" + rowCount; // HTML
 	}
-	
-	
 }
