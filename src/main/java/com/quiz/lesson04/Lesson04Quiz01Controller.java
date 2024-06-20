@@ -31,7 +31,7 @@ public class Lesson04Quiz01Controller {
 			@RequestParam("nickname") String nickname,
 			@RequestParam(value = "profileImageUrl", required = false) String profileImageUrl,
 			@RequestParam(value = "temperature", defaultValue = "36.5") double temperature) {
-			
+		
 		// db insert
 		sellerBO.addSeller(nickname, profileImageUrl, temperature);
 		
@@ -43,18 +43,9 @@ public class Lesson04Quiz01Controller {
 	// http://localhost:8080/lesson04/quiz01/seller-info-view
 	// http://localhost:8080/lesson04/quiz01/seller-info-view?id=3
 	@GetMapping("/seller-info-view")
-	public String sellerInfoView(
-			@RequestParam(value = "id", required = false) Integer id , 
-			Model model) {
-		
-		Seller seller = null;
-		
+	public String sellerInfoView(Model model) {
 		// 데이터 조회
-		if (id == null) {
-			 seller = sellerBO.getLatestSeller();			
-		} else {
-			 seller = sellerBO.getSellerById(id);
-		}
+		Seller seller = sellerBO.getLatestSeller();
 		
 		// Model에 데이터를 담아둔다.
 		model.addAttribute("seller", seller);

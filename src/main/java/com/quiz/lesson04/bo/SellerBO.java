@@ -14,21 +14,15 @@ public class SellerBO {
 	
 	// input: 파라미터들
 	// output: X
-	public void addSeller(String nickname, 
-			String profileImageUrl, double temperature) {
+	public void addSeller(String nickname111, 
+			String profileImageUrl111111, double temperature22223) {
 		
-		sellerMapper.insertSeller(nickname, profileImageUrl, temperature);
+		sellerMapper.insertSeller(nickname111, profileImageUrl111111, temperature22223);
 	}
 	
-	// intput: X
-	// output: Seller(채워져 있거나 null)
+	// input:X
+	// output:Seller(채워져 있거나 null)
 	public Seller getLatestSeller() {
 		return sellerMapper.selectLatestSeller();
-	}
-	
-	// input: id
-	// output: seller(채워져있거나 null)
-	public Seller getSellerById(int id) {
-		return sellerMapper.selectLatestSeller(id);
 	}
 }
