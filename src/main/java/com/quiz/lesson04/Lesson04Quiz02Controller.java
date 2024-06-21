@@ -12,37 +12,36 @@ import com.quiz.lesson04.bo.RealtorBO;
 import com.quiz.lesson04.domain.Realtor;
 
 @RequestMapping("/lesson04/quiz02")
-@Controller
+@Controller	
 public class Lesson04Quiz02Controller {
 	
 	@Autowired
-	private RealtorBO realetorBO;
-	
-	// 입력화면
+	private RealtorBO realtorBO;
+
+	// 입력 화면
 	// http://localhost:8080/lesson04/quiz02/add-realtor-view
-	@GetMapping("//add-realtor-view")
+	@GetMapping("/add-realtor-view")
 	public String addRealtorView() {
 		return "lesson04/addRealtor";
 	}
 	
-	// DB Insert, select
+	// DB insert, select => 방금 추가된 데이터 화면
 	@PostMapping("/add-realtor")
 	public String addRealtor(
 			@ModelAttribute Realtor realtor,
 			Model model) {
-	
+		
 		// DB insert
 		realtorBO.addRealtor(realtor);
 		
 		// id를 가지고 DB select
 		Realtor latestRealtor = realtorBO.getRealtorById(realtor.getId());
 		
-		// Model에 데이터 담기
+		// model 담기
 		model.addAttribute("realtor", latestRealtor);
 		
 		// 화면 이동
 		return "lesson04/afterAddRealtor";
 	}
-	
 	
 }
