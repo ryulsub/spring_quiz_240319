@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 public class WeatherHistory {
 
 	private int id;
+	
 	private LocalDate date;
 	private String weather;
 	private double temperatures;
