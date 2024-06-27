@@ -1,15 +1,24 @@
-package Lesson06Controller;
+package com.quiz.lesson06;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.quiz.lesson06.bo.BookmarkBO;
+import com.quiz.lesson06.domain.Bookmark;
 
 @RequestMapping("/lesson06")
 @Controller
 public class Lesson06Controller {
+	
+	@Autowired
+	private BookmarkBO bookmarkBO;
 
 	// 즐겨찾기 추가 화면
 	// http://localhost:8080/lesson06/add-bookmark-view
@@ -18,27 +27,23 @@ public class Lesson06Controller {
 		return "lesson06/addBookmark";
 	}
 	
-	// AJAX가 하는 요청 -> AJAX가 하는 응답값은 반드시 String이다.
-		@ResponseBody
-		@PostMapping("/add-bookmark")
-		public String addUser( 
-				@RequestParam("id") int id,
-				@RequestParam("name") String name,
-				@RequestParam("url") String url) {
-		
-			// db insert
-			addbookmarkBO.addBookrmark(id, name, url);
-			
-			// 응답값 - response body에 "성공" 들어감
-			return "성공";
-			
-		}
-		
+	// AJAX가 하는 요청
+	// 즐겨찾기 추가 로직
+	@ResponseBody
+	@PostMapping("/add-bookmark")
+	public Map<String, Object> addBookmark(
+			@ReqeustParam("name") String ){
 	
 	// 즐겨찾기 목록 화면
 	// http://localhost:8080/lesson06/bookmark-list-view
 	@GetMapping("/bookmark-list-view")
-	public String bookmarkListView() {
+	public String bookmarkListView(Model model) {
+		// db select => List<Bookmark>
+		List<Bookmark> bookmarkList = bookmarkBO.getBookmarkList();
+		
+		// model 담기
+		model.addAttribute("bookmarkList", bookmarkList);
+		
 		return "lesson06/bookmarkList";
 	}
 }

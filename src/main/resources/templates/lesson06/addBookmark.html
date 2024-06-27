@@ -27,51 +27,54 @@
 	
 	<script>
 		$(document).ready(function() {
-			
-			// 2) jquery의 AJAX 통신 이용
-    		$("#joinBtn").on('click', function() {
-    			//alert("클릭");
-    		
-    			// validation
-    			let name = $("input[name=name]").val().trim();
-    			if (name.length < 1) {
-    				alert("이름을 입력하세요");
-    				return;
-    			}
-    			
-    			let url = $("#url").val().trim();
-    			if (yyyymmdd == "") {
-    				alert("주소를 입력하세요");
-    				return;
-    			}
-    			
-    			console.log(name);
-    			console.log(url);
-    			
-    			
-    			// AJAX 통신 => 서버에 요청
-    			$.ajax({
-    				// request
-    				type: "POST"
-    				, url:"lesson06/ex01/add-user"
-    				, data:{"name":name, "url":url}
-    					
-    				// response
-    				// callback 함수 
-    				, success:function(data) { // data 파라미터: 응답값(String)
-    					//alert(data);
-    					if (data == "성공") {
-    						location.href = "/lesson06/ex01/after-add-user-view";
-    					}
-    				}
-    				, error:function(xhr, status, error) {
-    					alert(xhr);	
-    					alert(status);	
-    					alert(error);	
-    				}
-    			});
-    		});
-    	});
+			// 추가 버튼
+			$("#addBtn").on('click', function() {
+				//alert("버튼 클릭");
+				// validation
+				let name = $("#name").val().trim();
+				if (!name) {
+					alert("사이트명을 입력하세요");
+					return;
+				}
+				
+				let url = $("#url").val().trim();
+				if (!url) {
+					alert("주소를 입력하세요");
+					return;
+				}
+				
+				// http도 아니고 https도 아니면 => alert
+				if (url.startsWith("http://") == false
+						&& url.startsWith("https://") == false) {
+					alert("주소 형식이 잘못되었습니다.");
+					return;
+				}
+				
+				console.log(name);
+				console.log(url);
+				
+				// AJAX 통신 => 서버 요청
+				$.ajax({
+					// request
+					type:"POST"
+					, url:"/lesson06/add-bookmark"
+					, data:{"name":name, "url":url}
+					
+					// response
+					// callback 함수
+					, success:function(data) { // data: String
+						if (data == "성공") {
+							// 목록 화면으로 이동 - GET Method 요청
+							location.href = "/lesson06/bookmark-list-view";
+						}
+					}
+					, error:function(xhr, status, error) {
+						alert("데이터를 추가하는데 실패했습니다.");
+					}
+				});
+				
+			});//-- 추가버튼 이벤트 끝
+		}); //--ready 끝
 	</script>
 </body>
 </html>
