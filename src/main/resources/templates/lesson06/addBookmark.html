@@ -9,51 +9,52 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 </head>
 <body>
-	 <div class="container">
-		<h1>즐겨찾기 추가하기</h1>
-        <form action="/lesson06/quiz01/add-bookmark" method="post">
-            <div class="form-group">
-                <label for="title">제목</label>
-                <input type="text" id="title" name="title" class="form-control col-4">
-            </div>
-            <div class="form-group">
-                <label for="address">주소</label>
-                <input type="text" id="address" name="address" class="form-control col-4" placeholder="예) 19991201">
-            </div>
-        	<input type="button" id="addBtn" value="추가" class="btn btn-success">
-        </form>    
-      </div>
-      
-      
-      <script>
-      	$(document).ready(function() {
-      	// 2) jquery의 AJAX 통신 이용
-    		$("#addBtn").on('click', function() {
+	<div class="container">
+		<h1>즐겨찾기 추가</h1>
+		
+		<div class="form-group">
+			<label for="title">제목</label>
+			<input type="text" id="name" class="form-control">
+		</div>
+
+		<div class="form-group">
+			<label for="url">URL 주소</label>
+			<input type="text" id="url" class="form-control col-11">
+		</div>
+		
+		<button type="button" id="addBtn" class="btn btn-success btn-block">추가</button>
+	</div>
+	
+	<script>
+		$(document).ready(function() {
+			
+			// 2) jquery의 AJAX 통신 이용
+    		$("#joinBtn").on('click', function() {
     			//alert("클릭");
     		
     			// validation
-    			let title = $("input[name=title]").val().trim();
-    			if (title.length < 1) {
-    				alert("제목을 입력하세요");
+    			let name = $("input[name=name]").val().trim();
+    			if (name.length < 1) {
+    				alert("이름을 입력하세요");
     				return;
     			}
     			
-    			let address = $("#address").val().trim();
-    			if (address == "") {
+    			let url = $("#url").val().trim();
+    			if (yyyymmdd == "") {
     				alert("주소를 입력하세요");
     				return;
     			}
     			
+    			console.log(name);
+    			console.log(url);
     			
-    			console.log(title);
-    			console.log(address);
     			
     			// AJAX 통신 => 서버에 요청
     			$.ajax({
     				// request
     				type: "POST"
-    				, url:"lesson06/quiz01/addbookmark"
-    				, data:{"name":name, "yyyymmdd":yyyymmdd, "email":email, "introduce":introduce}
+    				, url:"lesson06/ex01/add-user"
+    				, data:{"name":name, "url":url}
     					
     				// response
     				// callback 함수 
@@ -71,6 +72,6 @@
     			});
     		});
     	});
-    </script>
+	</script>
 </body>
 </html>
