@@ -1,5 +1,6 @@
 package com.quiz.lesson06.mapper;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -21,4 +22,11 @@ public interface BookmarkMapper {
 	public List<Bookmark> selectBookmarkListByUrl(String url);
 	
 	public int deleteBookmarkById(int id);
+	
+	public void insertBooking(
+			String name,
+			LocalDateTime date, 
+			int day, 
+			int headcount, 
+			String phoneNumber );
 }

@@ -7,8 +7,8 @@ public class Booking {
 	private int id;
 	private String name;
 	private int headcount;
-	private String day;
-	private int date;
+	private int day;
+	private LocalDateTime date;
 	private String phoneNumber;
 	private String state;
 	private LocalDateTime createdAt;
@@ -33,16 +33,16 @@ public class Booking {
 	public void setHeadcount(int headcount) {
 		this.headcount = headcount;
 	}
-	public String getDay() {
+	public int getDay() {
 		return day;
 	}
-	public void setDay(String day) {
+	public void setDay(int day) {
 		this.day = day;
 	}
-	public int getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
-	public void setDate(int date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 	public String getPhoneNumber() {
@@ -69,5 +69,7 @@ public class Booking {
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-
+	
+	
+	
 }

@@ -1,5 +1,6 @@
 package com.quiz.lesson06.mapper;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -12,13 +13,12 @@ public interface BookingMapper {
 	
 	public List<Booking> selectBookingList();
 	
+	public int deleteBookingById(int id);
+	
 	public void insertBooking(
 			@Param("name") String name,
+			@Param("date") LocalDate date,
+			@Param("day") int day,
 			@Param("headcount") int headcount,
-			@Param("day") String day,
-			@Param("date") int date,
-			@Param("phoneNumber")String phoneNumber,
-			@Param("state")String state);
-	
-	
+			@Param("phoneNumber")String phoneNumber);
  }
