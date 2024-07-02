@@ -24,8 +24,7 @@ public class BookingController {
 	
 	@Autowired
 	private BookingBO bookingBO;
-	
-	// https://localhost:8080/booking/booking-list-view
+
 	// 예약 목록 화면
 	@GetMapping("/booking-list-view")
 	public String bookingListView(Model model) {
@@ -92,35 +91,30 @@ public class BookingController {
 		return "booking/checkBooking";
 	}
 	
-	
-	
-	
-	
-	// 예약 조회 화면
-		@GetMapping("/bookingList")
-		public String bookingList() {
-			return "booking/bookingList";
-		}
-		public String bookingList(Model model) {
-		// db select
-		List<Booking> bookingList = bookingBO.getBookingList();
-		
-		// Model에 담기
-		model.addAttribute("bookingList", bookingList);
-		
-		return "booking/bookingList";
-	}
-	
-	// AJAX요청
+	// AJAX 요청 - 예약 조회
 	@ResponseBody
 	@PostMapping("/check-booking")
 	public Map<String, Object> checkBooking(
-			
-	)
-	
-	
-	
-	
-	
-
+			@RequestParam("name") String name,
+			@RequestParam("phoneNumber") String phoneNumber) {
+		
+		// db select
+		Booking booking = bookingBO.getLatestBookingByNamePhoneNumber(name, phoneNumber);
+		
+		
+		// 응답값 => JSON
+		Map<String, Object> result = new HashMap<>();
+		if (booking != null) {
+			// {"code":200, "result":booking 객체}
+			// {"code":200, "result":{"id":3, "name":"신보람"....}}
+			result.put("code", 200);
+			result.put("result", booking);
+		} else {
+			// {"code":500, "error_message":"예약 내역이 없습니다."}
+			result.put("code", 500);
+			result.put("error_message", "예약 내역이 없습니다.");
+		}
+		
+		return result;
+	}
 }
