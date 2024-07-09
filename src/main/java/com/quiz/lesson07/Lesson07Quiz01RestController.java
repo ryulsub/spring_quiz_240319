@@ -14,8 +14,7 @@ public class Lesson07Quiz01RestController {
 	
 	@Autowired
 	private CompanyBO companyBO;
-	
-	
+
 	// /lesson07/quiz01/save1
 	@GetMapping("/save1")
 	public CompanyEntity save1() {
@@ -33,23 +32,23 @@ public class Lesson07Quiz01RestController {
 //		사업내용 : 여신 금융업
 //		규모 : 대기업
 //		사원수 : 6834명
-		
-		return companyBO.addCompany("버블팡", "여신금융업", "대기업", 6834);
-	
+		return companyBO.addCompany("버블팡", "여신 금융업", "대기업", 6834);
+	}
 	
 	// /lesson07/quiz01/update
-		@GetMapping("/update")
-		public CompanyEntity update() {
-			// id는 8번 규모를 중소기업. 사원수를 34명
-			return companyBO.updateCompanyById(2, "중소기업", 34);
+	@GetMapping("/update")
+	public CompanyEntity update() {
+		// id는 8번 규모를 중소기업, 사원수를 34명
+		return companyBO.updateCompanyById(8, "중소기업", 34);
 	}
-		
+	
 	// /lesson07/quiz01/delete
-		@GetMapping("/delete")
-		public String delete() {
-			// id 8
-			companyBO.deleteCompanyById(2);
-			
-			return "삭제 성공";
-		}
+	@GetMapping("/delete")
+	public String delete() {
+		// id 8
+		companyBO.deleteCompanyById(8);
+		
+		return "삭제 성공";
+	}
+	
 }
